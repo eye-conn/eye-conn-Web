@@ -9,9 +9,9 @@ require('dotenv').config();
 
 function Dashboard({setAuth: hasAuth, setAuthLoading: hasAuthLoading, Socket: socket, ...props}) {
   const [loading, setLoading] = useState(false)
-  const [allStations, setAllStations] = useState([])
-  const [inCode, setInCode] = useState(null)
-  const [outCode, setOutCode] = useState(null)
+  // const [allStations, setAllStations] = useState([])
+  // const [inCode, setInCode] = useState(null)
+  // const [outCode, setOutCode] = useState(null)
   // const user = getUser();
   // console.log(user)
 
@@ -20,12 +20,10 @@ function Dashboard({setAuth: hasAuth, setAuthLoading: hasAuthLoading, Socket: so
     axios.post(`${process.env.REACT_APP_HOST}/station/all`, {token: getToken()})
     .then((response) => {
       setLoading(false)
-      setAllStations(response.data.stations)
-      setInCode(response.data.stations[0].station_code)
-      setOutCode(response.data.stations[0].station_code)
+      // setAllStations(response.data.stations)
     }).catch((error) => {
       setLoading(false)
-      setAllStations([])
+      // setAllStations([])
     })
     return () => {
       
@@ -58,21 +56,7 @@ return <>
         <h2 className="stationName">OUT</h2>
         </div>
         <div className="stationDrop">
-        {/* <h2 className="stationName">Station 1</h2> */}
-       {/* create dropdown */}
-       <select name="inStation" id="inSelectInput" onChange={(e)=>{setInCode(e.target.value)}} >
-          {allStations.map((station) => {
-            return <option key={"in"+station.id} value={station.station_code}>{station.station_name}</option>
-          })}
-       </select>
-        </div>
-        <div className="stationDrop">
-        {/* <h2 className="stationName">Station 2</h2> */}
-        <select name="outStation" id="outSelectInput" onChange={(e)=>{setOutCode(e.target.value)}}>
-          {allStations.map((station) => {
-            return <option key={"out"+station.id} value={station.station_code}>{station.station_name}</option>
-          })}
-       </select>
+        
         </div>
         <div className="qrCont" id="inqr">
           

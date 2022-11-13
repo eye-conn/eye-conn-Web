@@ -35,7 +35,7 @@ const theme = createTheme();
 
 function Login({setAuth: hasAuth, setAuthLoading: hasAuthLoading, Socket: socket, ...props}) {
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState("fhvhvhjhjhv hvjycfrsdrftygk bjku");
 
   const isLogged = useCallback((val) => {
           hasAuthLoading(!val);
@@ -121,7 +121,8 @@ return <>
           <FormControlLabel
             control={<Checkbox id="remember" value="remember" color="primary" />}
             label="Remember me"
-          />
+          /><br/>
+          {error && <><div style={{ color: 'red', textAlign: 'center', fontSize: '15px' }}>{error}</div></>}
           <Button
             type="submit"
             fullWidth
