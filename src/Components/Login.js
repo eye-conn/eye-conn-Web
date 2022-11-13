@@ -46,7 +46,8 @@ function Login({setAuth: hasAuth, setAuthLoading: hasAuthLoading, Socket: socket
 
   // handle button click of login form
   const handleLogin = (e) => {
-    e.preventDefault();   
+    e.preventDefault();
+    isLogged(true) //remove   
     console.log(e.target.remember)
     setError(null);
     setLoading(true);
