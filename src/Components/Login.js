@@ -35,7 +35,7 @@ const theme = createTheme();
 
 function Login({setAuth: hasAuth, setAuthLoading: hasAuthLoading, Socket: socket, ...props}) {
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("fhvhvhjhjhv hvjycfrsdrftygk bjku");
+  const [error, setError] = useState(null);
 
   const isLogged = useCallback((val) => {
           hasAuthLoading(!val);
