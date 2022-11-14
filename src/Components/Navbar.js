@@ -46,26 +46,22 @@ export default function Navbar({setAuth: hasAuth, setAuthLoading: hasAuthLoading
 
   const settingDesc =  {
     "Profile" : (setting)=>{
-      return  <>
-      <MenuItem key={setting} onClick={handleCloseUserMenu}>
+      return   <MenuItem key={setting} onClick={handleCloseUserMenu}>
                   <Typography textAlign="center">{setting}</Typography>
                 </MenuItem>
-      </>
+      
     },
     "Account" : (setting)=>{
-      return  <>
-      <MenuItem key={setting} onClick={handleCloseUserMenu}>
+      return       <MenuItem key={setting} onClick={handleCloseUserMenu}>
                   <Typography textAlign="center">{setting}</Typography>
                 </MenuItem>
-      </>
+      
     },
     "Logout" : (setting)=>{
-      return  <>
-      <MenuItem key={setting} onClick={()=>{handleLogout();handleCloseUserMenu()}}>
+      return  <MenuItem key={setting} onClick={()=>{handleLogout();handleCloseUserMenu()}}>
                   <Typography textAlign="center">{setting}</Typography>
                 </MenuItem>
-      </>
-    },
+          },
   }
 
   const handleOpenNavMenu = (event) => {
@@ -168,7 +164,7 @@ export default function Navbar({setAuth: hasAuth, setAuthLoading: hasAuthLoading
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map((page) => (
-              <Link to={'/'+page.toLowerCase()} style={{ textDecoration: "none"}}>
+              <Link key={page} to={'/'+page.toLowerCase()} style={{ textDecoration: "none"}}>
               <Button
                 key={page}
                 onClick={handleCloseNavMenu}

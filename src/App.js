@@ -10,6 +10,7 @@ import { getToken, removeUserSession, setUserSession } from "./Utils/Common";
 import Login from "./Components/Login";
 import Navbar from "./Components/Navbar";
 import Dashboard from "./Components/Dashboard";
+import Signup from "./Components/Signup";
 // import Updatedetails from "./Components/Updatedetails";
 // import "./App.css";
 // import Travelledger from "./Components/Travelledger";
@@ -27,7 +28,7 @@ function App() {
     }
 
     axios
-      .get(`${process.env.REACT_APP_HOST}/verifyToken?token=${token}`)
+      .post(`${process.env.REACT_APP_HOST}/verifyToken`,{token:token})
       .then((response) => {
         setUserSession(response.data.token, response.data.username, response.data.name);
         setAuthLoading(false);
@@ -93,7 +94,11 @@ return <>
                 setAuthLoading={setAuthLoading}
                 // socket={socket}
               />
-
+              <PublicRoute
+                path="/signup"
+                component={Signup}
+                // socket={socket}
+              />
               <PrivateRoute
                 path="/dashboard"
                 component={Dashboard}

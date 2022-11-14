@@ -5,16 +5,19 @@ import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
-import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
+import Slide from '@mui/material/Slide';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import axios from 'axios';
+import Link from '@mui/material/Link';
+import { Link as Lnk } from 'react-router-dom';
 import { useState,useCallback } from 'react'
 import { setUserSession } from '../Utils/Common';
+import { Backdrop, CircularProgress } from '@mui/material';
 // import logo from './.png'
 require('dotenv').config();
 
@@ -47,19 +50,20 @@ function Login({setAuth: hasAuth, setAuthLoading: hasAuthLoading, Socket: socket
   // handle button click of login form
   const handleLogin = (e) => {
     e.preventDefault();
-    isLogged(true) //remove   
+    // isLogged(true) //remove   
     console.log(e.target.remember)
     setError(null);
     setLoading(true);
     axios.post(`${process.env.REACT_APP_HOST}/login`, { username: e.target.username.value, password: e.target.password.value, remember: "ADMIN" }).then(response => {
+      console.log(response.data)
       setLoading(false);
-      setUserSession(response.data?.token, response.data?.username, response.data?.name);
+      setUserSession(response.data?.userData?.token, response.data?.userData?.username, response.data?.userData?.name);
       isLogged(true)
       props.history.push('/dashboard');
     }).catch(error => {
       setLoading(false);
       console.log(error.response?.data)
-      if (error.response?.status === 401) setError(error.response?.data.error);
+      if (error.response?.status !== 500) setError(error.response?.data.error);
       else setError("Something went wrong. Please try again later.");
     });
   }
@@ -68,22 +72,19 @@ function Login({setAuth: hasAuth, setAuthLoading: hasAuthLoading, Socket: socket
   if (loading) {
 // return <div className="loadclass"><span className="loader-11"></span></div>;
 return <>
-<div className="loadclass-new">
-  <div className="spinner-box">
-<div className="configure-border-1">  
-  <div className="configure-core"></div>
-</div>  
-<div className="configure-border-2">
-  <div className="configure-core"></div>
-</div> 
-</div>
-</div>
+<Backdrop
+  sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+  open={loading}
+>
+  <CircularProgress color="inherit" />
+</Backdrop>
 </>;  }
 
-  return (
+  return (<>
     <ThemeProvider theme={theme}>
     <Container component="main" maxWidth="xs">
       <CssBaseline />
+  <Slide direction="left" in={true} mountOnEnter unmountOnExit>
       <Box
         sx={{
           marginTop: 8,
@@ -133,22 +134,24 @@ return <>
             LogIn
           </Button>
           <Grid container>
-            <Grid item xs>
-              <Link href="#" variant="body2">
-                Forgot password?
-              </Link>
+            <Grid item xs >
+            <Lnk to="/forgot" style={{ fontSize: "small", fontWeight: 'bold', color: '#1b86ff'}}>
+                {"Forgot password?"}
+              </Lnk>
             </Grid>
             <Grid item>
-              <Link href="#" variant="body2">
-                {"Don't have an account? Sign Up"}
-              </Link>
+            <Lnk to="/signup" style={{ fontSize: "small", fontWeight: 'bold', color: '#1b86ff'}}>
+            {"Don't have an account? Sign Up"}
+              </Lnk>
             </Grid>
           </Grid>
         </Box>
       </Box>
+  </Slide>
       <Copyright sx={{ mt: 8, mb: 4 }} />
     </Container>
   </ThemeProvider>
+  </>
   );
   // return (
   //   <div>
