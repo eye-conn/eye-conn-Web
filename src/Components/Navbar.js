@@ -20,7 +20,7 @@ import {  removeUserSession } from '../Utils/Common';
 
 
 const pages = ['Products', 'Pricing', 'Blog'];
-const settings = ['Profile', 'Account', 'Logout'];
+const settings = ['Account', 'Logout'];
 
 
 export default function Navbar({setAuth: hasAuth, setAuthLoading: hasAuthLoading, soc: socket, ...props}) {
@@ -45,14 +45,14 @@ export default function Navbar({setAuth: hasAuth, setAuthLoading: hasAuthLoading
         const [anchorElUser, setAnchorElUser] = React.useState(null);
 
   const settingDesc =  {
-    "Profile" : (setting)=>{
-      return   <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
-                </MenuItem>
+    // "Profile" : (setting)=>{
+    //   return   <MenuItem key={setting} onClick={handleCloseUserMenu}>
+    //               <Typography textAlign="center">{setting}</Typography>
+    //             </MenuItem>
       
-    },
+    // },
     "Account" : (setting)=>{
-      return       <MenuItem key={setting} onClick={handleCloseUserMenu}>
+      return       <MenuItem key={setting} onClick={()=>{history.push('/account');;handleCloseUserMenu()}}>
                   <Typography textAlign="center">{setting}</Typography>
                 </MenuItem>
       
@@ -75,7 +75,7 @@ export default function Navbar({setAuth: hasAuth, setAuthLoading: hasAuthLoading
     setAnchorElNav(null);
   };
 
-  const handleCloseUserMenu = () => {
+  const handleCloseUserMenu = (e) => {
     setAnchorElUser(null);
   };
 
