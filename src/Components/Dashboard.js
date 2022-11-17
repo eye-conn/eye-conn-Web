@@ -26,7 +26,7 @@ require('dotenv').config();
 
 
 function Dashboard({setAuth: hasAuth, setAuthLoading: hasAuthLoading, Socket: socket, ...props}) {
-  const [loading, setLoading] = useState(false)
+  const [loading,  ] = useState(false)
   const [saveloadingE, setSaveloadingE] = useState(false);
   const [encryptImage, setEncryptImage] = useState(null);
   const [saveloadingD, setSaveloadingD] = useState(false);
@@ -35,14 +35,14 @@ function Dashboard({setAuth: hasAuth, setAuthLoading: hasAuthLoading, Socket: so
   const [progressD, setProgressD] = useState(0)
   const [EncryptPhoto, setEncryptPhoto] = useState({file: null, path:null});
   const [DecryptPhoto, setDecryptPhoto] = useState({file: null, path:null});
-  const hiddenFileInputEncrypt = useRef(null);
+  // const hiddenFileInputEncrypt = useRef(null);
   const hiddenFileInputDecrypt = useRef(null);
   const cancelTokenSource = axios.CancelToken.source()
 
 
-  const handleClickEncrypt = event => {
-    hiddenFileInputEncrypt.current.click();
-  };    
+  // const handleClickEncrypt = event => {
+  //   hiddenFileInputEncrypt.current.click();
+  // };    
   const handleClickDecrypt = event => {
     hiddenFileInputDecrypt.current.click();
   };
@@ -433,93 +433,3 @@ variant="contained">Decrypt</Button>
 }
 
 export default Dashboard;
-
-{/* <Grid item xs={12} md={8} lg={6}>
-<Paper
-  sx={{
-    p: 2,
-    display: 'flex',
-    flexDirection: 'column',
-    height: 340,
-  }}
->
-  <Box sx={{
-// marginTop: 8,
-display: 'flex',
-flexDirection: 'column',
-alignItems: 'center',
-}}>
-<form onSubmit={handleESubmit}>
-    
-
-<Card sx={{ maxWidth: 345 }}>
-<CardHeader
-action={
-<IconButton onClick={handleClickEncrypt} aria-label="settings">
-<AddAPhoto />
-<input type="file" accept='image/*' id="Encrypt" onChange={handleChangeEncrypt} ref={hiddenFileInputEncrypt} style={{ display: "none" }} />
-</IconButton>
-}
-subheader="Your Photo"
-// subheader="September 14, 2016"
-/>   
-  </Card>
-  <Button color="primary"
-type="submit"
-disabled={saveloadingE}
-startIcon={saveloadingE ? (
-<CircularProgressWithLabel fontSize='24' value={progressE} />
-):<Save fontSize='50'/>}
-variant="contained">Encrypt</Button>
-</form>
-  </Box>
-</Paper>
-</Grid>
-
-<Grid item xs={12} md={4} lg={6}>
-<Paper
-  sx={{
-    p: 2,
-    display: 'flex',
-    flexDirection: 'column',
-    height: 340,
-  }}
->
-  <Box sx={{
-// marginTop: ,
-display: 'flex',
-flexDirection: 'column',
-alignItems: 'center',
-}}>
-<form onSubmit={handleDSubmit}>
-    <Card sx={{ maxWidth: 345 }}>
-<CardHeader
-action={
-<IconButton onClick={handleClickDecrypt} aria-label="settings">
-<AddAPhoto />
-<input type="file" accept='image/*' id="Decrypt" onChange={handleChangeDecrypt} ref={hiddenFileInputDecrypt} style={{ display: "none" }} />
-</IconButton>
-}
-subheader="Decrypt"
-// subheader="September 14, 2016"
-/></Card>
-<TextField
-margin="normal"
-required
-fullWidth
-id="key"
-label="Key"
-name="key"
-autoComplete="key"
-/>
-<Button color="primary"
-type="submit"
-disabled={saveloadingD}
-startIcon={saveloadingD ? (
-<CircularProgressWithLabel fontSize='24' value={progressD} />
-):<Save fontSize='50'/>}
-variant="contained">Decrypt</Button>
-</form>
-  </Box>
-</Paper>
-</Grid> */}
