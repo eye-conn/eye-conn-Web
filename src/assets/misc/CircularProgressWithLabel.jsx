@@ -3,9 +3,10 @@ import { CircularProgress, Typography } from '@mui/material';
 import React from 'react'
 
 export default function CircularProgressWithLabel(props) {
+  console.log(props.value)
     return (
         <Box sx={{ position: 'relative', display: 'inline-flex' }}>
-          <CircularProgress variant={props.value===100?'indeterminate':'determinate'} {...props} />
+          <CircularProgress variant={props.value===100?'indeterminate':'determinate'} size={props.size} />
           <Box
             sx={{
               top: 0,
