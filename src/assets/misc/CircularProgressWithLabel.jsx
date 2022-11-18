@@ -5,7 +5,7 @@ import React from 'react'
 export default function CircularProgressWithLabel(props) {
     return (
         <Box sx={{ position: 'relative', display: 'inline-flex' }}>
-          <CircularProgress variant="determinate" {...props} />
+          <CircularProgress variant={props.value===100?'indeterminate':'determinate'} {...props} />
           <Box
             sx={{
               top: 0,
