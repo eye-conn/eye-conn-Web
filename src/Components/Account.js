@@ -13,7 +13,7 @@ function Account(props) {
 
 
     useEffect(() => {
-        setLoading(false)
+        setLoading(true)
         axios.post(`${process.env.REACT_APP_HOST}/fetch/account`, {token: getToken()}).then(response => {
             setLoading(false)
             setAccount(response.data)

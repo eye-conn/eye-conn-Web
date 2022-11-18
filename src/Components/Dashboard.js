@@ -69,9 +69,9 @@ function Dashboard({
     if (!fileUploaded) return;
     if (
       fileUploaded.type.slice(0, 5) !== "image" ||
-      fileUploaded.size > 104857600
+      fileUploaded.size > 5242880
     ) {
-      return alert("Please upload a image less than 10MB");
+      return alert("Please upload a image less than 5MB");
     }
     // console.log(fileUploaded.size)
     // if (fileUploaded.size >= 307200){
@@ -115,12 +115,13 @@ function Dashboard({
   const handleChangeDecrypt = async (event) => {
     const reader = new FileReader();
     let fileUploaded = event.target.files[0];
+    // console.log(fileUploaded);
     if (!fileUploaded) return;
     if (
-      fileUploaded.type.slice(0, 5) !== "image" ||
-      fileUploaded.size > 10485760
+      fileUploaded.name.slice(-4) !== ".eye" ||
+      fileUploaded.size > 5242880
     ) {
-      return alert("Please upload a image less than 10MB");
+      return alert("Please upload a .eye less than 5MB");
     }
     // console.log(fileUploaded.size)
     // if (fileUploaded.size >= 307200) {
@@ -157,7 +158,7 @@ function Dashboard({
         setDecryptPhoto({ file: fileUploaded, path: e.target.result });
       };
       reader.readAsDataURL(fileUploaded);
-      // console.log(fileUploaded.size)
+      // console.log(DecryptPhoto)
     }
     // props.handleFile(fileUploaded);
   };
@@ -184,6 +185,7 @@ function Dashboard({
         console.log(response.data);
         setMsgOpen(true);
         setEncryptImage(response.data.file);
+        setEncryptPhoto({ file: null, path: null });
         setSaveloadingE(false);
         setProgressE(0)
       })
@@ -191,7 +193,9 @@ function Dashboard({
         console.log(error.response.data);
         // removeUserSession();
         setErrorOpen({ state: true, data: error.response.data.error });
+        setEncryptPhoto({ file: null, path: null });
         setSaveloadingE(false);
+        setProgressE(0)
         // setAuth(false);
       });
   };
@@ -199,6 +203,7 @@ function Dashboard({
   const handleDSubmit = (e) => {
     // console.log(size)
     e.preventDefault();
+    if (!DecryptPhoto.file) return alert("Please upload a .eye file");
     setSaveloadingD(true);
     const form = new FormData();
     form.append("decrypt", DecryptPhoto.file);
@@ -217,6 +222,7 @@ function Dashboard({
         console.log(response.data);
         setMsgOpen(true);
         setDecryptImage(response.data.file)
+        setDecryptPhoto({ file: null, path: null });
         setSaveloadingD(false);
         setProgressD(0)
       })
@@ -225,6 +231,8 @@ function Dashboard({
         // removeUserSession();
         setErrorOpen({ state: true, data: error.response.data.error });
         setSaveloadingD(false);
+        setDecryptPhoto({ file: null, path: null });
+        setProgressD(0)
         // setAuth(false);
       });
   };
@@ -353,6 +361,7 @@ function Dashboard({
                           {encryptImage && (
                             <Link
                               href={encryptImage}
+                              target="_blank"
                               download
                               sx={{
                                 mt: 0,
@@ -480,7 +489,7 @@ variant="contained">Encrypt</Button>
                                     <AddAPhoto />
                                     <input
                                       type="file"
-                                      accept="image/*"
+                                      accept=".eye"
                                       id="Decrypt"
                                       onChange={handleChangeDecrypt}
                                       ref={hiddenFileInputDecrypt}
@@ -488,8 +497,8 @@ variant="contained">Encrypt</Button>
                                     />
                                   </IconButton>
                                 }
-                                subheader="Decrypt"
-                                // subheader="September 14, 2016"
+                                subheader={DecryptPhoto.file ? DecryptPhoto.file.name : "Decrypt Photo"}
+                                
                               />
                             </Card>
                             <TextField
@@ -524,6 +533,7 @@ variant="contained">Encrypt</Button>
                           {decryptImage && (
                             <Link
                               href={decryptImage}
+                              target="_blank"
                               download
                               sx={{
                                 mt: 0,
