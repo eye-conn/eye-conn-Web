@@ -1,12 +1,13 @@
 import CloudUpload from '@mui/icons-material/CloudUpload'
-import { Alert, Backdrop, Button,  Chip, CircularProgress,  Grid, Paper, Slide, Snackbar, TextField, Typography } from '@mui/material'
+import { Alert, Backdrop, Button,  Chip, CircularProgress,  Grid, Link, Paper, Slide, Snackbar, TextField, Typography } from '@mui/material'
 import { Box } from '@mui/system'
+import { CopyBlock, dracula} from "react-code-blocks";
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { getToken } from '../Utils/Common'
 
 function Account(props) {
-    const [account, setAccount] = useState({name: "", username: "", telegramId: ""})
+    const [account, setAccount] = useState({name: "", username: "", telegramId: "", teleRegCode: ""})
     const [msgOpen, setMsgOpen] = useState(false)
     const [loading, setLoading] = useState(false)
 
@@ -69,7 +70,7 @@ function Account(props) {
     alignItems: 'center',
   }}
 >
-          <Box sx={{ mt: 0,height: '78vh', maxWidth: '80vh' }}>
+          <Box sx={{ mt: 0,height: '78vh', maxWidth:'80vh' }}>
           <Typography variant="h4" gutterBottom>
         Account
       </Typography>
@@ -113,13 +114,22 @@ function Account(props) {
             disabled
             fullWidth
             autoComplete="telegram"
-            // value={account?.telegramId}
+            value={account?.telegramId}
             onChange={e => setAccount({...account, telegramId: e.target.value})}
           /> 
         </Grid>
-        <Grid item xs={4} margin='auto' >
-            {account?.telegramId ? <Chip label="Connected" color="success" /> : <Chip label="Not Connected" color="error" />}
+        <Grid item xs={4} padding={0} >
+            {account?.telegramId ? <Chip label="Linked" color="success" />  : <Chip label="Not Linked" color="error" />}
+            
         </Grid>
+        {account?.telegramId ? null
+        :
+        <>
+        <Grid item xs={12} sm={6}>
+        <CopyBlock text={account.teleRegCode+"   "+account.username}  theme={dracula} showLineNumbers={false} language="text" codeBlock />
+        </Grid><Grid item xs={12} sm={6}> Visit
+        <Link href='https://t.me/eyeconnbot' target={'_blank'} > @eyeconnbot </Link>
+        </Grid></>}
         <Grid item xs={12}>
           <Button 
             variant="contained"

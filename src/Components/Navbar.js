@@ -104,7 +104,7 @@ export default function Navbar({setAuth: hasAuth, setAuthLoading: hasAuthLoading
               textDecoration: 'none',
             }}
           >
-            LOGO
+           EYECONN
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
@@ -160,7 +160,7 @@ export default function Navbar({setAuth: hasAuth, setAuthLoading: hasAuthLoading
               textDecoration: 'none',
             }}
           >
-            LOGO
+            EYECONN
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map((page) => (
