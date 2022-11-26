@@ -16,6 +16,7 @@ import AdbIcon from '@mui/icons-material/Adb';
 import { useCallback } from 'react'
 import { Link, useHistory } from 'react-router-dom';
 import {  removeUserSession } from '../Utils/Common';
+import main_logo from '..///assets///logo_main.png';
 // import './navbar.css'
 
 
@@ -88,7 +89,9 @@ export default function Navbar({setAuth: hasAuth, setAuthLoading: hasAuthLoading
     <AppBar position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
+          {/* <Icon  sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} /> */}
+          {/* <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} /> */}
+        <img src={main_logo} alt="logo" width="40" height="40" style={{marginRight: '1vw'}} />
           <Typography
             variant="h6"
             noWrap

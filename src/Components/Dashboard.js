@@ -16,6 +16,7 @@ import CloudUpload from "@mui/icons-material/CloudUpload";
 import CloudDownload from "@mui/icons-material/CloudDownload";
 import Https from "@mui/icons-material/Https";
 import NoEncryptionGmailerrorred from "@mui/icons-material/NoEncryptionGmailerrorred";
+import no_img from "..///assets///no-img.png";
 // import Typography from '@mui/material/Typography';
 import {
   Alert,
@@ -391,9 +392,9 @@ function Dashboard({
                           <Box sx={{ mt: 3 }}>
                             <img
                               src={
-                                EncryptPhoto
+                                EncryptPhoto.file
                                   ? EncryptPhoto.path
-                                  : "https://via.placeholder.com/150"
+                                  : no_img
                               }
                               alt="preview"
                               height={250}
