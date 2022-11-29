@@ -122,7 +122,7 @@ return <>
           />
           <FormControlLabel
             control={<Checkbox id="remember" value="remember" color="primary" />}
-            label="Remember me"
+            label="Remember me" 
           /><br/>
           {error && <><div style={{ color: 'red', textAlign: 'center', fontSize: '15px' }}>{error}</div></>}
           <Button
