@@ -34,6 +34,9 @@ function Copyright(props) {
   );
 }
 
+
+
+
 const theme = createTheme();
 
 function Login({setAuth: hasAuth, setAuthLoading: hasAuthLoading, Socket: socket, ...props}) {
@@ -46,6 +49,9 @@ function Login({setAuth: hasAuth, setAuthLoading: hasAuthLoading, Socket: socket
         },
         [hasAuth,hasAuthLoading],
       );
+
+
+
 
   // handle button click of login form
   const handleLogin = (e) => {
@@ -67,6 +73,9 @@ function Login({setAuth: hasAuth, setAuthLoading: hasAuthLoading, Socket: socket
       else setError("Something went wrong. Please try again later.");
     });
   }
+
+
+
 
 
   if (loading) {
